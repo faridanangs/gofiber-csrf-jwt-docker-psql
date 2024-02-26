@@ -1,0 +1,34 @@
+services:
+  go_db_app:
+    container_name: go_db_app
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=anangs123
+      - POSTGRES_USER=root
+      - POSTGRES_DB=go_apps
+    volumes:
+      - pddata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - restoran
+
+  # go_app_app:
+  #   container_name: go_app_app
+  #   build: .
+  #   env_file:
+  #     - .env
+  #   ports:
+  #     - 8000:8000
+  #   depends_on:
+  #     - go_db_app
+  #   networks:
+  #     - restoran
+
+networks:
+  restoran:
+    driver: bridge
+
+volumes:
+  pddata:
